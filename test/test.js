@@ -31,11 +31,11 @@ describe('Naive bayes', function () {
     });
 
     it('Small test', function () {
-        var cases = [[6,148,72,35,0,33.6,0.627,5],
-                     [1.50,85,66.5,29,0,26.6,0.351,31],
-                     [8,183,64,0,0,23.3,0.672,32],
-                     [0.5,89,65.5,23,94,28.1,0.167,21],
-                     [0,137,40,35,168,43.1,2.288,33]];
+        var cases = [[6, 148, 72, 35, 0, 33.6, 0.627, 5],
+                     [1.50, 85, 66.5, 29, 0, 26.6, 0.351, 31],
+                     [8, 183, 64, 0, 0, 23.3, 0.672, 32],
+                     [0.5, 89, 65.5, 23, 94, 28.1, 0.167, 21],
+                     [0, 137, 40, 35, 168, 43.1, 2.288, 33]];
         var predictions = [1, 0, 1, 0, 1];
         var nb = new NaiveBayes();
         nb.train(cases, predictions);
@@ -49,11 +49,11 @@ describe('Naive bayes', function () {
     });
 
     it('Export and import', function () {
-        var cases = [[6,148,72,35,0,33.6,0.627,5],
-            [1.50,85,66.5,29,0,26.6,0.351,31],
-            [8,183,64,0,0,23.3,0.672,32],
-            [0.5,89,65.5,23,94,28.1,0.167,21],
-            [0,137,40,35,168,43.1,2.288,33]];
+        var cases = [[6, 148, 72, 35, 0, 33.6, 0.627, 5],
+            [1.50, 85, 66.5, 29, 0, 26.6, 0.351, 31],
+            [8, 183, 64, 0, 0, 23.3, 0.672, 32],
+            [0.5, 89, 65.5, 23, 94, 28.1, 0.167, 21],
+            [0, 137, 40, 35, 168, 43.1, 2.288, 33]];
         var predictions = [1, 0, 1, 0, 1];
         var nb = new NaiveBayes();
         nb.train(cases, predictions);
@@ -83,27 +83,27 @@ describe('Multinomial Naive Bayes', function () {
         predictions = [0, 0, 0, 1];
     });
 
-   it('main test', function () {
+    it('main test', function () {
 
-       var predict = [[3, 0, 0, 0, 1, 1]];
+        var predict = [[3, 0, 0, 0, 1, 1]];
 
-       var mnb = new MultimonialNB();
-       mnb.train(cases, predictions);
-       var prediction = mnb.predict(predict);
+        var mnb = new MultimonialNB();
+        mnb.train(cases, predictions);
+        var prediction = mnb.predict(predict);
 
-       prediction[0].should.be.equal(0);
-   });
+        prediction[0].should.be.equal(0);
+    });
 
-   it('save and load', function () {
-       var predict = [[3, 0, 0, 0, 1, 1]];
+    it('save and load', function () {
+        var predict = [[3, 0, 0, 0, 1, 1]];
 
-       var mnb = new MultimonialNB();
-       mnb.train(cases, predictions);
-       mnb = MultimonialNB.load(JSON.parse(JSON.stringify(mnb)));
-       var prediction = mnb.predict(predict);
+        var mnb = new MultimonialNB();
+        mnb.train(cases, predictions);
+        mnb = MultimonialNB.load(JSON.parse(JSON.stringify(mnb)));
+        var prediction = mnb.predict(predict);
 
-       prediction[0].should.be.equal(0);
-   });
+        prediction[0].should.be.equal(0);
+    });
 
 
 });

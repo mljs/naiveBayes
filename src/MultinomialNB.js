@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var Matrix = require('ml-matrix');
 var Utils = require('./utils');
@@ -45,7 +45,7 @@ class MultinomialNB {
     /**
      * Retrieves the predictions for the dataset with the current model.
      * @param {Matrix|Array} dataset
-     * @returns {Array} - predictions from the dataset.
+     * @return {Array} - predictions from the dataset.
      */
     predict(dataset) {
         dataset = Matrix.checkMatrix(dataset);
@@ -61,23 +61,23 @@ class MultinomialNB {
 
     /**
      * Function that saves the current model.
-     * @returns {object} - model in JSON format.
+     * @return {object} - model in JSON format.
      */
     toJSON() {
         return {
             model: 'MultinomialNB',
             priorProbability: this.priorProbability,
             conditionalProbability: this.conditionalProbability
-        }
+        };
     }
 
     /**
      * Creates a new Multinomial Naive Bayes from the given model
      * @param {object} model
-     * @returns {MultinomialNB}
+     * @return {MultinomialNB}
      */
     static load(model) {
-        if(model.model !== 'MultinomialNB') {
+        if (model.model !== 'MultinomialNB') {
             throw new RangeError('The current model is not a Multinomial Naive Bayes');
         }
 
