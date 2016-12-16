@@ -72,17 +72,38 @@ describe('Naive bayes', function () {
 });
 
 describe('Multinomial Naive Bayes', function () {
-   it.only('test', function () {
-       var cases = [[2, 1, 0, 0, 0, 0],
-           [2, 0, 1, 0, 0, 0],
-           [1, 0, 0, 1, 0, 0],
-           [1, 0, 0, 0, 1, 1]];
-       var predictions = [0, 0, 0, 1];
+
+    var cases, predictions;
+
+    beforeEach(function () {
+        cases = [[2, 1, 0, 0, 0, 0],
+            [2, 0, 1, 0, 0, 0],
+            [1, 0, 0, 1, 0, 0],
+            [1, 0, 0, 0, 1, 1]];
+        predictions = [0, 0, 0, 1];
+    });
+
+   it('main test', function () {
 
        var predict = [[3, 0, 0, 0, 1, 1]];
 
        var mnb = new MultimonialNB();
        mnb.train(cases, predictions);
-       mnb.predict(predict);
-   })
+       var prediction = mnb.predict(predict);
+
+       prediction[0].should.be.equal(0);
+   });
+
+   it('save and load', function () {
+       var predict = [[3, 0, 0, 0, 1, 1]];
+
+       var mnb = new MultimonialNB();
+       mnb.train(cases, predictions);
+       mnb = MultimonialNB.load(JSON.parse(JSON.stringify(mnb)));
+       var prediction = mnb.predict(predict);
+
+       prediction[0].should.be.equal(0);
+   });
+
+
 });

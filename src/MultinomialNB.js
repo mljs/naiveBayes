@@ -5,7 +5,12 @@ var Utils = require('./utils');
 
 class MultinomialNB {
     constructor(model) {
+        if(model) {
+            this.conditionalProbability = Matrix.checkMatrix(model.conditionalProbability);
+            this.priorProbability = Matrix.checkMatrix(model.priorProbability);
+        }
     }
+
 
     train(trainingSet, trainingLabels) {
         trainingSet = Matrix.checkMatrix(trainingSet);
@@ -34,14 +39,24 @@ class MultinomialNB {
             predictions[i] = this.conditionalProbability.clone().mulRowVector(currentElement).sum('row')
                              .add(this.priorProbability).maxIndex()[0];
         }
+
+        return predictions;
     }
 
     toJSON() {
-
+        return {
+            model: 'MultinomialNB',
+            priorProbability: this.priorProbability,
+            conditionalProbability: this.conditionalProbability
+        }
     }
 
-    load() {
+    static load(model) {
+        if(model.model !== 'MultinomialNB') {
+            throw new RangeError('The current model is not a Multinomial Naive Bayes');
+        }
 
+        return new MultinomialNB(model);
     }
 }
 
