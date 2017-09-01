@@ -1,3 +1,2 @@
-'use strict';
-
-module.exports = exports = require('./naiveBayes');
+export {GaussianNB} from './GaussianNB';
+export {MultinomialNB} from './MultinomialNB';

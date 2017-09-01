@@ -1,6 +1,5 @@
-'use strict';
 
-var Matrix = require('ml-matrix').Matrix;
+import Matrix from 'ml-matrix';
 
 /**
  * Function that retuns an array of matrices of the cases that belong to each class.
@@ -8,7 +7,7 @@ var Matrix = require('ml-matrix').Matrix;
  * @param {Array} y - predictions
  * @return {Array}
  */
-function separateClasses(X, y) {
+export function separateClasses(X, y) {
     var features = X.columns;
 
     var classes = 0;
@@ -32,7 +31,3 @@ function separateClasses(X, y) {
     }
     return separatedClasses;
 }
-
-module.exports = {
-    separateClasses: separateClasses
-};

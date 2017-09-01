@@ -2,22 +2,18 @@
   "name": "ml-naivebayes",
   "version": "1.0.3",
   "description": "Naive bayes library",
-  "main": "src/index.js",
-  "directories": {
-    "lib": "src",
-    "test": "test"
-  },
+  "main": "lib/index.js",
+  "files": [
+    "src",
+    "lib"
+  ],
   "scripts": {
-    "eslint": "eslint src test",
+    "eslint": "eslint src",
     "eslint-fix": "npm run eslint -- --fix",
-    "test": "npm run test-mocha && npm run eslint",
-    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- --require should --reporter dot --recursive",
-    "test-mocha": "mocha --require should --reporter mocha-better-spec-reporter"
+    "prepublish": "rollup -c",
+    "test": "run-s testonly eslint",
+    "testonly": "jest"
   },
-  "engines": {
-    "node": ">=2.0.0"
-  },
-  "tonicExampleFilename": "./tonic.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/mljs/naive-bayes.git"
@@ -27,7 +23,9 @@
     "bayes",
     "classifier",
     "machine",
-    "learning"
+    "learning",
+    "gaussian",
+    "multinomial"
   ],
   "author": "Jefferson Hernández",
   "license": "MIT",
@@ -40,13 +38,14 @@
     "ml-stat": "^1.1.0"
   },
   "devDependencies": {
-    "eslint": "^3.4.0",
-    "eslint-config-cheminfo": "^1.2.0",
-    "eslint-plugin-no-only-tests": "^1.1.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "eslint": "^4.0.0",
+    "eslint-config-cheminfo": "^1.8.0",
+    "eslint-plugin-no-only-tests": "^2.0.0",
+    "jest": "^20.0.4",
     "ml-dataset-iris": "^1.0.0",
-    "mocha": "^3.1.2",
-    "mocha-better-spec-reporter": "^3.0.2",
     "random-js": "^1.0.8",
-    "should": "^11.1.0"
+    "npm-run-all": "^4.0.2",
+    "rollup": "^0.43.0"
   }
 }

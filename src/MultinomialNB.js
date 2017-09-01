@@ -1,9 +1,11 @@
-'use strict';
 
-var Matrix = require('ml-matrix').Matrix;
-var Utils = require('./utils');
+import Matrix from 'ml-matrix';
+import * as Utils from './utils';
 
-class MultinomialNB {
+/**
+ * @class MultinomialNB
+ */
+export class MultinomialNB {
 
     /**
      * Constructor for Multinomial Naive Bayes, the model parameter is for load purposes.
@@ -25,6 +27,11 @@ class MultinomialNB {
      */
     train(trainingSet, trainingLabels) {
         trainingSet = Matrix.checkMatrix(trainingSet);
+
+        if (trainingSet.rows !== trainingLabels.length) {
+            throw new RangeError('the size of the training set and the training labels must be the same.');
+        }
+
         var separateClasses = Utils.separateClasses(trainingSet, trainingLabels);
         this.priorProbability = new Matrix(separateClasses.length, 1);
 
@@ -72,13 +79,13 @@ class MultinomialNB {
     }
 
     /**
-     * Creates a new Multinomial Naive Bayes from the given model
+     * Creates a new MultinomialNB from the given model
      * @param {object} model
      * @return {MultinomialNB}
      */
     static load(model) {
         if (model.name !== 'MultinomialNB') {
-            throw new RangeError('The current model is not a Multinomial Naive Bayes');
+            throw new RangeError('The current model is not a Multinomial Naive Bayes, current model:', model.name);
         }
 
         return new MultinomialNB(model);
@@ -88,5 +95,3 @@ class MultinomialNB {
 function matrixLog(i, j) {
     this[i][j] = Math.log(this[i][j]);
 }
-
-module.exports = MultinomialNB;
