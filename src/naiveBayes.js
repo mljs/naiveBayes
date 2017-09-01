@@ -1,6 +1,6 @@
 'use strict';
 
-var Matrix = require('ml-matrix');
+var Matrix = require('ml-matrix').Matrix;
 var Stat = require('ml-stat');
 var Utils = require('./utils');
 
@@ -33,8 +33,7 @@ function NaiveBayes(reload, model) {
  */
 NaiveBayes.prototype.train = function (trainingSet, trainingLabels) {
     var C1 = Math.sqrt(2 * Math.PI); // constant to precalculate the squared root
-    if (!Matrix.isMatrix(trainingSet)) trainingSet = new Matrix(trainingSet);
-    else trainingSet = trainingSet.clone();
+    trainingSet = Matrix.checkMatrix(trainingSet);//if (!Matrix.isMatrix(trainingSet)) trainingSet = new Matrix(trainingSet);
 
     if (trainingSet.rows !== trainingLabels.length) {
         throw new RangeError('the size of the training set and the training labels must be the same.');

@@ -1,6 +1,6 @@
 'use strict';
 
-var Matrix = require('ml-matrix');
+var Matrix = require('ml-matrix').Matrix;
 
 /**
  * Function that retuns an array of matrices of the cases that belong to each class.

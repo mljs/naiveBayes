@@ -3,7 +3,7 @@
 var NaiveBayes = require('..');
 var MultimonialNB = require('../src/MultinomialNB');
 var separateClasses = require('../src/utils').separateClasses;
-var Matrix = require('ml-matrix');
+var Matrix = require('ml-matrix').Matrix;
 var irisDataset = require('ml-dataset-iris');
 var Random = require('random-js');
 

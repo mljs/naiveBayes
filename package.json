@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/mljs/naive-bayes",
   "dependencies": {
-    "ml-matrix": "^2.2.0",
+    "ml-matrix": "^5.0.1",
     "ml-stat": "^1.1.0"
   },
   "devDependencies": {
