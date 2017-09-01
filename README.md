@@ -5,70 +5,39 @@
   [![David deps][david-image]][david-url]
   [![npm download][download-image]][download-url]
 
-Naive bayes classifier.
+Naive bayes classifiers.
 
-## Methods
+## Installation
 
-### new NaiveBayes()
+`$ npm install ml-naivebayes`
 
-Constructor that takes no arguments.
+## Usage
 
-__Example__
-
-```js
-var nb = new NaiveBayes();
-```
-
-### train(trainingSet, predictions)
-
-Train the Naive Bayes model to the given training set and predictions
-
-__Arguments__
-
-* `trainingSet` - A matrix of the training set.
-* `trainingLabels` - An array of value for each case in the training set.
-
-__Example__
+### [GaussianNB](./src/GaussianNB.js)
 
 ```js
-var cases = [[6,148,72,35,0,33.6,0.627,5],
-             [1.50,85,66.5,29,0,26.6,0.351,31],
-             [8,183,64,0,0,23.3,0.672,32],
-             [0.5,89,65.5,23,94,28.1,0.167,21],
-             [0,137,40,35,168,43.1,2.288,33]];
-var predictions = [1, 0, 1, 0, 1];
+// assuming that you created Xtrain, Xtest, Ytrain, Ytest
+import {GaussianNB} from 'ml-naivebayes'
 
-nb.train(trainingSet, predictions);
+var model = new GaussianNB();
+model.train(Xtrain, Ytest);
+
+var predictions = model.predict(Xtest);
 ```
 
-### predict(dataset)
-
-Predict the values of the dataset.
-
-__Arguments__
-
-* `dataset` - A matrix that contains the dataset.
-
-__Example__
+### [MultinomialNB](./src/MultinomialNB.js)
 
 ```js
-var dataset = [[6,148,72,35,0,33.6,0.627,5],
-               [1.50,85,66.5,29,0,26.6,0.351,31]];
+// assuming that you created Xtrain, Xtest, Ytrain, Ytest
+import {MultinomialNB} from 'ml-naivebayes'
 
-var ans = nb.predict(dataset);
+var model = new MultinomialNB();
+model.train(Xtrain, Ytest);
+
+var predictions = model.predict(Xtest);
 ```
 
-### export()
-
-Exports the actual Naive Bayes model to an Javascript Object.
-
-### load(model)
-
-Returns a new Naive Bayes Classifier with the given model.
-
-__Arguments__
-
-* `model` - Javascript Object generated from export() function.
+## [API Documentation](http://mljs.github.io/naive-bayes/)
 
 ## Authors
 
