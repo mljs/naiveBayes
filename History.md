@@ -1,3 +1,18 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/mljs/naive-bayes/compare/v1.0.3...v2.0.0) (2017-07-21)
+
+
+### Chores
+
+* update dependencies ([eef9590](https://github.com/mljs/naive-bayes/commit/eef9590))
+
+
+### BREAKING CHANGES
+
+* Removed support for Node 4
+
+
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/mljs/naive-bayes/compare/v1.0.2...v1.0.3) (2016-08-16)
 
