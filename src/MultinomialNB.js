@@ -65,7 +65,7 @@ class MultinomialNB {
      */
     toJSON() {
         return {
-            model: 'MultinomialNB',
+            name: 'MultinomialNB',
             priorProbability: this.priorProbability,
             conditionalProbability: this.conditionalProbability
         };
@@ -77,7 +77,7 @@ class MultinomialNB {
      * @return {MultinomialNB}
      */
     static load(model) {
-        if (model.model !== 'MultinomialNB') {
+        if (model.name !== 'MultinomialNB') {
             throw new RangeError('The current model is not a Multinomial Naive Bayes');
         }
 
