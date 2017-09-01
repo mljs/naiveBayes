@@ -162,7 +162,7 @@ function accuracy(arr1, arr2) {
     var len = arr1.length;
     var total = 0;
     for (var i = 0; i < len; ++i) {
-        if(arr1[i] === arr2[i]) {
+        if (arr1[i] === arr2[i]) {
             total++;
         }
     }
