@@ -1,6 +1,5 @@
-
 import Matrix from 'ml-matrix';
-import * as Utils from './utils';
+import {separateClasses} from './utils';
 
 /**
  * @class MultinomialNB
@@ -10,7 +9,7 @@ export class MultinomialNB {
     /**
      * Constructor for Multinomial Naive Bayes, the model parameter is for load purposes.
      *
-     * @param {object} model - for load purposes.
+     * @param {object} [model] - for load purposes.
      * @constructor
      */
     constructor(model) {
@@ -32,17 +31,17 @@ export class MultinomialNB {
             throw new RangeError('the size of the training set and the training labels must be the same.');
         }
 
-        var separateClasses = Utils.separateClasses(trainingSet, trainingLabels);
-        this.priorProbability = new Matrix(separateClasses.length, 1);
+        var separateClass = separateClasses(trainingSet, trainingLabels);
+        this.priorProbability = new Matrix(separateClass.length, 1);
 
-        for (var i = 0; i < separateClasses.length; ++i) {
-            this.priorProbability[i][0] = Math.log(separateClasses[i].length / trainingSet.rows);
+        for (var i = 0; i < separateClass.length; ++i) {
+            this.priorProbability[i][0] = Math.log(separateClass[i].length / trainingSet.rows);
         }
 
         var features = trainingSet.columns;
-        this.conditionalProbability = new Matrix(separateClasses.length, features);
-        for (i = 0; i < separateClasses.length; ++i) {
-            var classValues = Matrix.checkMatrix(separateClasses[i]);
+        this.conditionalProbability = new Matrix(separateClass.length, features);
+        for (i = 0; i < separateClass.length; ++i) {
+            var classValues = Matrix.checkMatrix(separateClass[i]);
             var total = classValues.sum();
             var divisor = total + features;
             this.conditionalProbability.setRow(i, classValues.sum('column').add(1).div(divisor).apply(matrixLog));
@@ -85,7 +84,7 @@ export class MultinomialNB {
      */
     static load(model) {
         if (model.name !== 'MultinomialNB') {
-            throw new RangeError('The current model is not a Multinomial Naive Bayes, current model:', model.name);
+            throw new RangeError(`${model.name} is not a Multinomial Naive Bayes`);
         }
 
         return new MultinomialNB(model);

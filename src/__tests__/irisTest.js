@@ -7,27 +7,26 @@ import irisDataset from 'ml-dataset-iris';
 import Random from 'random-js';
 
 var r = new Random(Random.engines.mt19937().seed(42));
+var X = irisDataset.getNumbers();
+var y = irisDataset.getClasses();
+var classes = irisDataset.getDistinctClasses();
+
+var transform = {};
+for (var i = 0; i < classes.length; ++i) {
+    transform[classes[i]] = i;
+}
+
+for (i = 0; i < y.length; ++i) {
+    y[i] = transform[y[i]];
+}
+
+shuffle(X, y);
+var Xtrain = X.slice(0, 110);
+var ytrain = y.slice(0, 110);
+var Xtest = X.slice(110);
+var ytest = y.slice(110);
 
 describe('Test with iris dataset', () => {
-    var X = irisDataset.getNumbers();
-    var y = irisDataset.getClasses();
-    var classes = irisDataset.getDistinctClasses();
-
-    var transform = {};
-    for (var i = 0; i < classes.length; ++i) {
-        transform[classes[i]] = i;
-    }
-
-    for (i = 0; i < y.length; ++i) {
-        y[i] = transform[y[i]];
-    }
-
-    shuffle(X, y);
-    var Xtrain = X.slice(0, 110);
-    var ytrain = y.slice(0, 110);
-    var Xtest = X.slice(110);
-    var ytest = y.slice(110);
-
     test('Gaussian naive bayes', () => {
         var gnb = new GaussianNB();
         gnb.train(Xtrain, ytrain);
