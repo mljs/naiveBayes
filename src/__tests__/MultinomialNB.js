@@ -1,13 +1,12 @@
 import {MultinomialNB} from '../MultinomialNB';
 
+const cases = [[2, 1, 0, 0, 0, 0],
+    [2, 0, 1, 0, 0, 0],
+    [1, 0, 0, 1, 0, 0],
+    [1, 0, 0, 0, 1, 1]];
+const predictions = [0, 0, 0, 1];
+
 describe('Multinomial Naive Bayes', function () {
-
-    var cases = [[2, 1, 0, 0, 0, 0],
-        [2, 0, 1, 0, 0, 0],
-        [1, 0, 0, 1, 0, 0],
-        [1, 0, 0, 0, 1, 1]];
-    var predictions = [0, 0, 0, 1];
-
     test('main test', () => {
 
         var predict = [[3, 0, 0, 0, 1, 1]];

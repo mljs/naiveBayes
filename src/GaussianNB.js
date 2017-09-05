@@ -1,6 +1,6 @@
 import Matrix from 'ml-matrix';
 import Stat from 'ml-stat';
-import * as Utils from './utils';
+import {separateClasses} from './utils';
 
 /**
  * @class GaussianNB
@@ -39,7 +39,7 @@ export class GaussianNB {
             throw new RangeError('the size of the training set and the training labels must be the same.');
         }
 
-        var separatedClasses = Utils.separateClasses(trainingSet, trainingLabels);
+        var separatedClasses = separateClasses(trainingSet, trainingLabels);
         var calculateProbabilities = new Array(separatedClasses.length);
         this.means = new Array(separatedClasses.length);
         for (var i = 0; i < separatedClasses.length; ++i) {

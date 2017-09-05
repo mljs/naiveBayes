@@ -2,11 +2,9 @@ import {GaussianNB} from '..';
 import {separateClasses} from '../utils';
 import Matrix from 'ml-matrix';
 
+const cases = [[0, 0], [0, 1], [1, 0], [1, 1], [2, 2]];
+const predictions = [0, 0, 0, 1, 1];
 describe('Naive bayes', () => {
-
-    var cases = [[0, 0], [0, 1], [1, 0], [1, 1], [2, 2]];
-    var predictions = [0, 0, 0, 1, 1];
-
     test('Basic test', () => {
         var nb = new GaussianNB();
         nb.train(cases, predictions);

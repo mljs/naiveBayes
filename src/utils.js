@@ -1,4 +1,3 @@
-
 import Matrix from 'ml-matrix';
 
 /**
