@@ -3,6 +3,7 @@
   "version": "1.0.3",
   "description": "Naive bayes library",
   "main": "lib/index.js",
+  "module": "src/index.js",
   "files": [
     "src",
     "lib"
