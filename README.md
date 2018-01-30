@@ -20,7 +20,7 @@ Naive bayes classifiers.
 import {GaussianNB} from 'ml-naivebayes'
 
 var model = new GaussianNB();
-model.train(Xtrain, Ytest);
+model.train(Xtrain, Ytrain);
 
 var predictions = model.predict(Xtest);
 ```
@@ -32,7 +32,7 @@ var predictions = model.predict(Xtest);
 import {MultinomialNB} from 'ml-naivebayes'
 
 var model = new MultinomialNB();
-model.train(Xtrain, Ytest);
+model.train(Xtrain, Ytrain);
 
 var predictions = model.predict(Xtest);
 ```
