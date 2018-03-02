@@ -150,7 +150,7 @@ function calculateLogProbability(value, mean, C1, C2) {
     value = value - mean;
     var possibleDevisionBy0 = Math.log(C1 * Math.exp((value * value) / C2));
     if (Number.isNaN(possibleDevisionBy0) || !Number.isFinite(possibleDevisionBy0)) {
-        return Math.log(Number.MAX_VALUE)
+        return 0;
     }
     return possibleDevisionBy0;
 }
