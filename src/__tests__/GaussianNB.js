@@ -36,6 +36,54 @@ describe('Naive bayes', () => {
         expect(result).toEqual(predictions);
     });
 
+    test('single column clustering', () => {
+        var cases = [[1, 3],
+            [2, 5],
+            [3, 8],
+            [4, 10],
+            [5, 6],
+            [6, 11]];
+        var predictions = [0, 0, 1, 1, 0, 1];
+        var nb = new GaussianNB();
+        nb.train(cases, predictions);
+
+        var result = nb.predict([[10, 4], [0, 9]]);
+
+        expect(result).toEqual([0, 1]);
+    });
+
+    test('low deviation column', () => {
+        var cases = [[1.00001, 3],
+            [1.00001001, 5],
+            [1.00001, 8],
+            [1.00001002, 10],
+            [1.00001, 6],
+            [1.00001, 11]];
+        var predictions = [0, 0, 1, 1, 0, 1];
+        var nb = new GaussianNB();
+        nb.train(cases, predictions);
+
+        var result = nb.predict([[1, 4], [1, 9]]);
+
+        expect(result).toEqual([0, 1]);
+    });
+
+    test('zero deviation column', () => {
+        var cases = [[0, 3],
+            [0, 5],
+            [0, 8],
+            [0, 10],
+            [0, 6],
+            [0, 11]];
+        var predictions = [0, 0, 1, 1, 0, 1];
+        var nb = new GaussianNB();
+        nb.train(cases, predictions);
+
+        var result = nb.predict([[0, 4], [0, 9]]);
+
+        expect(result).toEqual([0, 1]);
+    });
+
     test('Export and import', () => {
         var cases = [[6, 148, 72, 35, 0, 33.6, 0.627, 5],
             [1.50, 85, 66.5, 29, 0, 26.6, 0.351, 31],

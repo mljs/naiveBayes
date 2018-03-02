@@ -148,5 +148,9 @@ function getCurrentClass(currentCase, mean, classes) {
  */
 function calculateLogProbability(value, mean, C1, C2) {
     value = value - mean;
-    return Math.log(C1 * Math.exp((value * value) / C2));
+    var possibleDevisionBy0 = Math.log(C1 * Math.exp((value * value) / C2));
+    if (Number.isNaN(possibleDevisionBy0) || !Number.isFinite(possibleDevisionBy0)) {
+        return Math.log(Number.MAX_VALUE)
+    }
+    return possibleDevisionBy0;
 }
