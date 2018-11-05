@@ -11,9 +11,11 @@ export class GaussianNB {
    * @param {object} model
    */
   constructor(reload, model) {
+    this.predictionsSymbolMap = {};
     if (reload) {
       this.means = model.means;
       this.calculateProbabilities = model.calculateProbabilities;
+      this.predictionsSymbolMap = model.predictionsSymbolMap;
     }
   }
 
@@ -37,10 +39,13 @@ export class GaussianNB {
       );
     }
 
-    var separatedClasses = separateClasses(trainingSet, trainingLabels);
+    var sc = separateClasses(trainingSet, trainingLabels);
+    var separatedClasses = sc.separatedClasses;
+    var classesMap = sc.actualClassesMap;
     var calculateProbabilities = new Array(separatedClasses.length);
     this.means = new Array(separatedClasses.length);
     for (var i = 0; i < separatedClasses.length; ++i) {
+      this.predictionsSymbolMap[i] = classesMap[i];
       var means = Stat.matrix.mean(separatedClasses[i]);
       var std = Stat.matrix.standardDeviation(separatedClasses[i], means);
 
@@ -87,7 +92,7 @@ export class GaussianNB {
       );
     }
 
-    return predictions;
+    return predictions.map((i) => this.predictionsSymbolMap[i]);
   }
 
   /**
@@ -98,7 +103,8 @@ export class GaussianNB {
     return {
       modelName: 'NaiveBayes',
       means: this.means,
-      calculateProbabilities: this.calculateProbabilities
+      calculateProbabilities: this.calculateProbabilities,
+      predictionsSymbolMap: this.predictionsSymbolMap
     };
   }
 
